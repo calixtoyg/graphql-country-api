@@ -19,12 +19,13 @@ async function insertUsers() {
 }
 
 async function insertCountries() {
-  // const countries = JSON.parse(require('fs').readFileSync('./src/bootstrap/bootstrap.json').toString());
-  // await countryController.addAllCountries(countries);
+  const countries = JSON.parse(require('fs').readFileSync('./src/bootstrap/bootstrap.json').toString());
+  await countryController.addAllCountries(countries);
 }
 
 exports.insertData = async () => {
   const data = [];
-  return await insertCountries();
-  // data.push(insertUsers());
+  data.push(insertCountries());
+  data.push(insertUsers());
+  await Promise.all(data);
 };

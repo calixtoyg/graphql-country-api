@@ -26,8 +26,7 @@ exports.getCountryByName = async ({ name }) => {
 
 exports.addAllCountries = async (countries) => {
   try {
-    const insertedCountries = await Country.create(countries);
-    console.log('this was succesful');
+    return await Country.create(countries);
   } catch (e) {
     console.error(e);
     throw e;
