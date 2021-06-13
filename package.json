@@ -1,0 +1,50 @@
+{
+  "name": "graphql-country-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "format": "prettier --write src/**/*.js",
+    "test": "tap \"test/**/*.test.js\"",
+    "routes": "fastify print-routes src/app.js",
+    "lint": "eslint src/** --fix",
+    "start": "MONGO_URL=mongo:27017 fastify start -l info src/app.js -p 8080 --debug-host 0.0.0.0",
+    "dev": "fastify start -w -l info -P src/app.js  -p 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calixtoyg/graphql-country-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/calixtoyg/graphql-country-api/issues"
+  },
+  "homepage": "https://github.com/calixtoyg/graphql-country-api#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
+    "close-with-grace": "^1.1.0",
+    "fastify": "^3.0.0",
+    "fastify-autoload": "^3.3.1",
+    "fastify-cli": "^2.13.0",
+    "fastify-jwt": "^3.0.0",
+    "fastify-plugin": "^3.0.0",
+    "fastify-rate-limit": "^5.5.0",
+    "fastify-sensible": "^3.1.0",
+    "graphql": "^15.5.0",
+    "mercurius": "^7.7.0",
+    "mongoose": "^5.12.13"
+  },
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.3.1",
+    "tap": "^15.0.9"
+  }
+}
