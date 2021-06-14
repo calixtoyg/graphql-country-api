@@ -9,9 +9,9 @@ module.exports = fp(async function (fastify) {
       reply.send(err);
     }
   });
-  // fastify.addHook('onRoute', (routeOptions) => {
-  //     if (routeOptions.url === '/graphql') {
-  //         routeOptions.preValidation = []
-  //     }
-  // })
+  fastify.addHook('onRoute', (routeOptions) => {
+    if (routeOptions.url === '/graphql') {
+      routeOptions.preValidation = [];
+    }
+  });
 });
