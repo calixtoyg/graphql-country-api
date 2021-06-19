@@ -15,9 +15,8 @@ exports.getCountries = async () => {
 exports.getCountryByName = async ({ name }) => {
   try {
     // const cars = await Car.find()
-    const data = (await axios.get(`https://restcountries.eu/rest/v2/name/${name}`)).data;
-    console.log(data[0]);
-    return data[0];
+    const regex = new RegExp(name);
+    return await Country.findOne({name: regex});
   } catch (err) {
     console.error(err);
     throw err;
@@ -26,7 +25,9 @@ exports.getCountryByName = async ({ name }) => {
 
 exports.addAllCountries = async (countries) => {
   try {
-    return await Country.create(countries);
+    const country = new Country(countries[0])
+    return await country.save();
+
   } catch (e) {
     console.error(e);
     throw e;

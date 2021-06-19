@@ -11,7 +11,7 @@ module.exports = fp(async function (fastify) {
   });
   fastify.addHook('onRoute', (routeOptions) => {
     if (routeOptions.url === '/graphql') {
-      routeOptions.preValidation = [];
+      routeOptions.preValidation = [fastify.authenticate];
     }
   });
 });

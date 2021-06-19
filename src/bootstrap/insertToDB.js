@@ -1,5 +1,6 @@
 const countryController = require('../controllers/countryController');
 const userController = require('../controllers/userController');
+const countries = require('./bootstrap');
 
 async function insertUsers() {
   const usersPromises = [];
@@ -19,13 +20,12 @@ async function insertUsers() {
 }
 
 async function insertCountries() {
-  const countries = JSON.parse(require('fs').readFileSync('./src/bootstrap/bootstrap.json').toString());
   await countryController.addAllCountries(countries);
 }
 
 exports.insertData = async () => {
   const data = [];
   data.push(insertCountries());
-  data.push(insertUsers());
+  // data.push(insertUsers());
   await Promise.all(data);
 };

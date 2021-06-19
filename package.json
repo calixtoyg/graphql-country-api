@@ -11,7 +11,7 @@
     "test": "tap \"test/**/*.test.js\"",
     "routes": "fastify print-routes src/app.js",
     "lint": "eslint src/** --fix",
-    "start": "MONGO_URL=mongo:27017 fastify start -l info src/app.js -p 8080 --debug-host 0.0.0.0",
+    "start": "MONGO_URL=mongo:27017 fastify start -l info src/app.js -p 8080 --debug-host 0.0.0.0 | pino-pretty --colorize",
     "dev": "fastify start -w -l info -P src/app.js  -p 8080"
   },
   "repository": {
@@ -42,6 +42,7 @@
     "mongoose": "^5.12.13"
   },
   "devDependencies": {
+    "pino-pretty": "4.3.0",
     "eslint": "^7.28.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",

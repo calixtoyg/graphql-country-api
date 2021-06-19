@@ -8,7 +8,7 @@ const bootstrap = require('./bootstrap/insertToDB');
 async function startMongoConnection() {
   return new Promise((resolve, reject) => {
     mongoose
-      .connect(`mongodb://${process.env.MONGO_URL || 'localhost:27017'}/user`, { useNewUrlParser: true })
+      .connect(`mongodb://${process.env.MONGO_URL || 'localhost:27018'}/user`, { useNewUrlParser: true })
       .then(() => {
         console.log('MongoDB connected...');
         resolve();
