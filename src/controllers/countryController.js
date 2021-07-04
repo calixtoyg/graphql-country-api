@@ -1,11 +1,12 @@
+
 'use strict';
-const axios = require('axios');
 const Country = require('../models/Country');
 
 exports.getCountries = async () => {
   try {
     // const cars = await Car.find()
-    return (await axios.get('https://restcountries.eu/rest/v2/all')).data;
+    let newVar = await Country.find();
+    return newVar;
   } catch (err) {
     console.error(err);
     throw err;
@@ -14,20 +15,26 @@ exports.getCountries = async () => {
 
 exports.getCountryByName = async ({ name }) => {
   try {
-    // const cars = await Car.find()
-    const regex = new RegExp(name);
-    return await Country.findOne({name: regex});
+    return await Country.find({name: name});
   } catch (err) {
     console.error(err);
     throw err;
   }
 };
 
+exports.getCountriesByName = async ({ name }) => {
+  try {
+    return await Country.find({name: {$regex: new RegExp(name, 'i')}});
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
+
 exports.addAllCountries = async (countries) => {
   try {
-    const country = new Country(countries[0])
-    return await country.save();
-
+    return Country.create(countries)
   } catch (e) {
     console.error(e);
     throw e;

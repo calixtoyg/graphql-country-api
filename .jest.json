@@ -1,0 +1,26 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "testEnvironment": "node",
+  "testRegex": "/test/(.*).spec.ts",
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/src/"
+  ],
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@lib/(.*)": "<rootDir>/src/lib/$1",
+    "@models/(.*)": "<rootDir>/src/models/$1"
+  },
+  "collectCoverageFrom": [
+    "!build/**/**/mocks/*.js",
+    "src/**/*.ts",
+    "!build/**/*.test.js",
+    "!src/models/*.ts",
+    "!src/index.ts",
+    "!test/*",
+    "!build/**/test/**/*.js",
+    "!**/node_modules/**"
+  ]
+}

@@ -8,7 +8,7 @@ const bootstrap = require('./bootstrap/insertToDB');
 async function startMongoConnection() {
   return new Promise((resolve, reject) => {
     mongoose
-      .connect(`mongodb://${process.env.MONGO_URL || 'localhost:27018'}/user`, { useNewUrlParser: true })
+      .connect(`mongodb://${process.env.MONGO_URL || 'localhost:27017'}/user`, { useNewUrlParser: true })
       .then(() => {
         console.log('MongoDB connected...');
         resolve();
@@ -21,12 +21,12 @@ async function startMongoConnection() {
 }
 
 module.exports = async function (fastify, opts) {
-  // Place here your custom code!
-  // Do not touch the following lines
+  //TODO testear un poco en react.
+  fastify.register(require('fastify-rate-limit'), {
+    max: 50,
+    timeWindow: '1 minute',
+  });
 
-  // This loads all plugins defined in plugins
-  // those should be support plugins that are reused
-  // through your application
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),
     options: Object.assign({}, opts),
@@ -46,8 +46,7 @@ module.exports = async function (fastify, opts) {
 
   await startMongoConnection();
 
-  await bootstrap.insertData();
-
-  // process.env.EXCHANGE_RATE = await exchangeRates('SEK')
-  console.log('Aplication something is going on');
+  if (process.env.BOOTSTRAP_DATA) {
+    await bootstrap.insertData();
+  }
 };

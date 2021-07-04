@@ -42,10 +42,11 @@
     "mongoose": "^5.12.13"
   },
   "devDependencies": {
-    "pino-pretty": "4.3.0",
     "eslint": "^7.28.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
+    "jest": "^27.0.6",
+    "pino-pretty": "4.3.0",
     "prettier": "^2.3.1",
     "tap": "^15.0.9"
   }

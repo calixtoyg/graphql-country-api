@@ -11,6 +11,7 @@ RUN        npm install -p
 USER       node
 
 ENV        NODE_ENV="production"
+ENV        BOOTSTRAP_DATA=true
 EXPOSE     8080
 # Running port is configured through API_PORT env variable
 ENTRYPOINT ["npm"]

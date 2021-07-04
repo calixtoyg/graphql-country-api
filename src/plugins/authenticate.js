@@ -11,6 +11,7 @@ module.exports = fp(async function (fastify) {
   });
   fastify.addHook('onRoute', (routeOptions) => {
     if (routeOptions.url === '/graphql') {
+      routeOptions.preHandler = fastify.rateLimit();
       routeOptions.preValidation = [fastify.authenticate];
     }
   });

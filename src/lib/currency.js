@@ -11,10 +11,3 @@ module.exports.toSEK = async (base) => {
     return 'Exchange unavailable';
   }
 };
-
-module.exports.exchangeRates = async (rateTo) => {
-  const exchangeInfo = (
-    await axios.get('http://data.fixer.io/api/latest?access_key=6c2df4851203cca6bbbf9f0694f3e8bf')
-  ).data;
-  return exchangeInfo.rates[rateTo];
-};

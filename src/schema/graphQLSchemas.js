@@ -1,6 +1,9 @@
+
+
 const graphql = require('graphql');
 const countryController = require('../controllers/countryController');
 const { toSEK } = require('../lib/currency');
+const { isEmpty } = require('../lib/util')
 const {
   GraphQLSchema,
   GraphQLObjectType,
@@ -16,6 +19,12 @@ const countryType = new GraphQLObjectType({
   name: 'Country',
   fields: () => ({
     _id: { type: GraphQLID },
+    id: {
+      type: GraphQLID,
+      async resolve(parent) {
+        return parent._id;
+      },
+    },
     name: { type: GraphQLString },
     topLevelDomain: { type: new GraphQLList(GraphQLString) },
     alpha2Code: { type: GraphQLString },
@@ -113,8 +122,11 @@ const RootQuery = new GraphQLObjectType({
     },
     countries: {
       type: new GraphQLList(countryType),
-      async resolve() {
-        return await countryController.getCountries();
+      args: { name: { type: GraphQLString } },
+      async resolve(parent, args) {
+        if (isEmpty(args))
+          return await countryController.getCountries();
+        return await countryController.getCountriesByName(args);
       },
     },
   },
