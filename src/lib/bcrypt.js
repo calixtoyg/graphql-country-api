@@ -13,7 +13,7 @@ exports.encrypt = async (password) =>
 
 exports.compare = async (password, hash) =>
   new Promise((resolve) => {
-    bcrypt.compare(password, hash, function (err, result) {
+    bcrypt.compare(password, hash, function(err, result) {
       if (err || !result) {
         if (err) {
           console.error(err);

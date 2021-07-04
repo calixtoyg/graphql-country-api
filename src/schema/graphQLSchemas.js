@@ -1,9 +1,7 @@
-
-
 const graphql = require('graphql');
 const countryController = require('../controllers/countryController');
-const { toSEK } = require('../lib/currency');
-const { isEmpty } = require('../lib/util')
+const {toSEK} = require('../lib/currency');
+const {isEmpty} = require('../lib/util');
 const {
   GraphQLSchema,
   GraphQLObjectType,
@@ -18,62 +16,62 @@ const {
 const countryType = new GraphQLObjectType({
   name: 'Country',
   fields: () => ({
-    _id: { type: GraphQLID },
+    _id: {type: GraphQLID},
     id: {
       type: GraphQLID,
       async resolve(parent) {
         return parent._id;
       },
     },
-    name: { type: GraphQLString },
-    topLevelDomain: { type: new GraphQLList(GraphQLString) },
-    alpha2Code: { type: GraphQLString },
-    alpha3Code: { type: GraphQLString },
-    callingCodes: { type: new GraphQLList(GraphQLString) },
-    altSpellings: { type: new GraphQLList(GraphQLString) },
-    capital: { type: GraphQLString },
-    region: { type: GraphQLString },
-    subregion: { type: GraphQLString },
-    population: { type: GraphQLInt },
-    currencies: { type: new GraphQLList(currencyType) },
-    latlng: { type: new GraphQLList(GraphQLInt) },
-    demonym: { type: GraphQLString },
-    area: { type: GraphQLInt },
-    gini: { type: GraphQLInt },
-    timezones: { type: new GraphQLList(GraphQLString) },
-    borders: { type: new GraphQLList(GraphQLString) },
-    nativeName: { type: GraphQLString },
-    numericCode: { type: GraphQLString },
-    languages: { type: new GraphQLList(language) },
-    translations: { type: new GraphQLList(translations) },
-    flag: { type: GraphQLString },
-    regionalBlocs: { type: new GraphQLList(regionalBloc) },
-    cioc: { type: GraphQLString },
+    name: {type: GraphQLString},
+    topLevelDomain: {type: new GraphQLList(GraphQLString)},
+    alpha2Code: {type: GraphQLString},
+    alpha3Code: {type: GraphQLString},
+    callingCodes: {type: new GraphQLList(GraphQLString)},
+    altSpellings: {type: new GraphQLList(GraphQLString)},
+    capital: {type: GraphQLString},
+    region: {type: GraphQLString},
+    subregion: {type: GraphQLString},
+    population: {type: GraphQLInt},
+    currencies: {type: new GraphQLList(currencyType)},
+    latlng: {type: new GraphQLList(GraphQLInt)},
+    demonym: {type: GraphQLString},
+    area: {type: GraphQLInt},
+    gini: {type: GraphQLInt},
+    timezones: {type: new GraphQLList(GraphQLString)},
+    borders: {type: new GraphQLList(GraphQLString)},
+    nativeName: {type: GraphQLString},
+    numericCode: {type: GraphQLString},
+    languages: {type: new GraphQLList(language)},
+    translations: {type: new GraphQLList(translations)},
+    flag: {type: GraphQLString},
+    regionalBlocs: {type: new GraphQLList(regionalBloc)},
+    cioc: {type: GraphQLString},
   }),
 });
 
 const translations = new GraphQLObjectType({
   name: 'Translation',
   fields: () => ({
-    de: { type: GraphQLString },
-    es: { type: GraphQLString },
-    fr: { type: GraphQLString },
-    ja: { type: GraphQLString },
-    it: { type: GraphQLString },
-    br: { type: GraphQLString },
-    pt: { type: GraphQLString },
-    nl: { type: GraphQLString },
-    hr: { type: GraphQLString },
-    fa: { type: GraphQLString },
+    de: {type: GraphQLString},
+    es: {type: GraphQLString},
+    fr: {type: GraphQLString},
+    ja: {type: GraphQLString},
+    it: {type: GraphQLString},
+    br: {type: GraphQLString},
+    pt: {type: GraphQLString},
+    nl: {type: GraphQLString},
+    hr: {type: GraphQLString},
+    fa: {type: GraphQLString},
   }),
 });
 
 const currencyType = new GraphQLObjectType({
   name: 'Currency',
   fields: () => ({
-    code: { type: GraphQLString },
-    name: { type: GraphQLString },
-    symbol: { type: GraphQLString },
+    code: {type: GraphQLString},
+    name: {type: GraphQLString},
+    symbol: {type: GraphQLString},
     SEKConversion: {
       type: GraphQLString,
       async resolve(parent) {
@@ -85,28 +83,28 @@ const currencyType = new GraphQLObjectType({
 const currencyTypeInput = new GraphQLInputObjectType({
   name: 'CurrencyInput',
   fields: () => ({
-    code: { type: GraphQLString },
-    name: { type: GraphQLString },
-    symbol: { type: GraphQLString },
+    code: {type: GraphQLString},
+    name: {type: GraphQLString},
+    symbol: {type: GraphQLString},
   }),
 });
 
 const language = new GraphQLObjectType({
   name: 'Language',
   fields: () => ({
-    iso639_1: { type: GraphQLString },
-    iso639_2: { type: GraphQLString },
-    name: { type: GraphQLString },
-    nativeName: { type: GraphQLString },
+    iso639_1: {type: GraphQLString},
+    iso639_2: {type: GraphQLString},
+    name: {type: GraphQLString},
+    nativeName: {type: GraphQLString},
   }),
 });
 
 const regionalBloc = new GraphQLObjectType({
   name: 'RegionalBloc',
   fields: () => ({
-    acronym: { type: GraphQLString },
-    otherNames: { type: new GraphQLList(GraphQLString) },
-    otherAcronyms: { type: new GraphQLList(GraphQLString) },
+    acronym: {type: GraphQLString},
+    otherNames: {type: new GraphQLList(GraphQLString)},
+    otherAcronyms: {type: new GraphQLList(GraphQLString)},
   }),
 });
 
@@ -115,17 +113,16 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     country: {
       type: countryType,
-      args: { name: { type: GraphQLString } },
+      args: {name: {type: GraphQLString}},
       async resolve(parent, args) {
         return await countryController.getCountryByName(args);
       },
     },
     countries: {
       type: new GraphQLList(countryType),
-      args: { name: { type: GraphQLString } },
+      args: {name: {type: GraphQLString}},
       async resolve(parent, args) {
-        if (isEmpty(args))
-          return await countryController.getCountries();
+        if (isEmpty(args)) return await countryController.getCountries();
         return await countryController.getCountriesByName(args);
       },
     },
@@ -138,9 +135,9 @@ const Mutations = new GraphQLObjectType({
     addCountry: {
       type: countryType,
       args: {
-        name: { type: GraphQLString },
-        currencies: { type: new GraphQLList(currencyTypeInput) },
-        population: { type: GraphQLInt },
+        name: {type: GraphQLString},
+        currencies: {type: new GraphQLList(currencyTypeInput)},
+        population: {type: GraphQLInt},
       },
       async resolve(parent, args) {
         const data = await countryController.addCountry(args);
@@ -150,10 +147,10 @@ const Mutations = new GraphQLObjectType({
     editCountry: {
       type: countryType,
       args: {
-        id: { type: new GraphQLNonNull(GraphQLID) },
-        name: { type: GraphQLString },
-        currencies: { type: new GraphQLList(currencyTypeInput) },
-        population: { type: GraphQLInt },
+        id: {type: new GraphQLNonNull(GraphQLID)},
+        name: {type: GraphQLString},
+        currencies: {type: new GraphQLList(currencyTypeInput)},
+        population: {type: GraphQLInt},
       },
       async resolve(parent, args) {
         const data = await countryController.updateCountry(args);
@@ -163,7 +160,7 @@ const Mutations = new GraphQLObjectType({
     deleteCountry: {
       type: countryType,
       args: {
-        id: { type: new GraphQLNonNull(GraphQLID) },
+        id: {type: new GraphQLNonNull(GraphQLID)},
       },
       async resolve(parent, args) {
         const data = await countryController.deleteCountry(args);

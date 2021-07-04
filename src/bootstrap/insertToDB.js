@@ -1,22 +1,22 @@
 const countryController = require('../controllers/countryController');
 const userController = require('../controllers/userController');
-const { countries } = require('./bootstrap');
+const {countries} = require('./bootstrap');
 
 async function insertUsers() {
   const usersPromises = [];
   usersPromises.push(
-    userController.addUser({
-      email: "test",
-      user: 'test',
-      password: 'test',
-    }),
+      userController.addUser({
+        email: 'test',
+        user: 'test',
+        password: 'test',
+      }),
   );
   usersPromises.push(
-    userController.addUser({
-      email: 'test',
-      user: 'john',
-      password: 'doe',
-    }),
+      userController.addUser({
+        email: 'test',
+        user: 'john',
+        password: 'doe',
+      }),
   );
   return Promise.all(usersPromises);
 }

@@ -7,7 +7,7 @@ const fp = require('fastify-plugin');
  *
  * @see https://github.com/fastify/fastify-sensible
  */
-module.exports = fp(async function (fastify) {
+module.exports = fp(async function(fastify) {
   fastify.register(require('fastify-sensible'), {
     errorHandler: false,
   });

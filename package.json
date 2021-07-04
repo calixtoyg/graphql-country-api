@@ -8,7 +8,7 @@
   },
   "scripts": {
     "format": "prettier --write src/**/*.js",
-    "test": "tap \"test/**/*.test.js\"",
+    "test": "jest --config .jest.json --coverage",
     "routes": "fastify print-routes src/app.js",
     "lint": "eslint src/** --fix",
     "start": "MONGO_URL=mongo:27017 fastify start -l info src/app.js -p 8080 --debug-host 0.0.0.0 | pino-pretty --colorize",

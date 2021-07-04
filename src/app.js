@@ -8,20 +8,20 @@ const bootstrap = require('./bootstrap/insertToDB');
 async function startMongoConnection() {
   return new Promise((resolve, reject) => {
     mongoose
-      .connect(`mongodb://${process.env.MONGO_URL || 'localhost:27017'}/user`, { useNewUrlParser: true })
-      .then(() => {
-        console.log('MongoDB connected...');
-        resolve();
-      })
-      .catch((err) => {
-        console.log(err);
-        reject(err);
-      });
+        .connect(`mongodb://${process.env.MONGO_URL || 'localhost:27017'}/user`, {useNewUrlParser: true})
+        .then(() => {
+          console.log('MongoDB connected...');
+          resolve();
+        })
+        .catch((err) => {
+          console.log(err);
+          reject(err);
+        });
   });
 }
 
-module.exports = async function (fastify, opts) {
-  //TODO testear un poco en react.
+module.exports = async function(fastify, opts) {
+  // TODO testear un poco en react.
   fastify.register(require('fastify-rate-limit'), {
     max: 50,
     timeWindow: '1 minute',

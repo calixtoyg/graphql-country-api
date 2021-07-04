@@ -3,7 +3,7 @@ exports.countryNameSchema = {
     required: ['name'],
     type: 'object',
     properties: {
-      name: { type: 'string' },
+      name: {type: 'string'},
     },
   },
 };

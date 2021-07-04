@@ -1,11 +1,10 @@
-
 'use strict';
 const Country = require('../models/Country');
 
 exports.getCountries = async () => {
   try {
     // const cars = await Car.find()
-    let newVar = await Country.find();
+    const newVar = await Country.find();
     return newVar;
   } catch (err) {
     console.error(err);
@@ -13,7 +12,7 @@ exports.getCountries = async () => {
   }
 };
 
-exports.getCountryByName = async ({ name }) => {
+exports.getCountryByName = async ({name}) => {
   try {
     return await Country.find({name: name});
   } catch (err) {
@@ -22,19 +21,18 @@ exports.getCountryByName = async ({ name }) => {
   }
 };
 
-exports.getCountriesByName = async ({ name }) => {
+exports.getCountriesByName = async ({name}) => {
   try {
     return await Country.find({name: {$regex: new RegExp(name, 'i')}});
   } catch (err) {
     console.error(err);
     throw err;
   }
-}
-
+};
 
 exports.addAllCountries = async (countries) => {
   try {
-    return Country.create(countries)
+    return Country.create(countries);
   } catch (e) {
     console.error(e);
     throw e;
@@ -51,7 +49,7 @@ exports.addCountry = async (args) => {
   }
 };
 
-exports.deleteCountry = async ({ id }) => {
+exports.deleteCountry = async ({id}) => {
   try {
     return await Country.findByIdAndDelete(id);
   } catch (e) {
