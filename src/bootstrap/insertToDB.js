@@ -6,14 +6,14 @@ async function insertUsers() {
   const usersPromises = [];
   usersPromises.push(
       userController.addUser({
-        email: 'test',
+        email: 'test@test.com',
         user: 'test',
         password: 'test',
       }),
   );
   usersPromises.push(
       userController.addUser({
-        email: 'test',
+        email: 'john.doe@gmail.com',
         user: 'john',
         password: 'doe',
       }),
