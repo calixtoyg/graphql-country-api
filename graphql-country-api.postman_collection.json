@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "27775f80-8b73-4a7f-b853-6c7ae5e52c1a",
+		"name": "graphql-country-api",
+		"description": "This is a collection to test some of the endpoints of the repo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"calixto.y.gonzalez@gmail.com\",\r\n    \"user\": \"Calixto Gonzalez\",\r\n    \"password\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"calixto.y.gonzalez@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add country",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  addCountry(\r\n    name: \"Carlos\", \r\n    currencies: [\r\n      {code: \"ARS\", name: \"Argentine peso\", symbol: \"$\"}\r\n    ], \r\n    population: 10000\r\n  ){\r\n    name\r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get countries",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n    country(name: \"Germany\") {\r\n        id\r\n        name,\r\n        currencies {\r\n            SEKConversion\r\n        }\r\n    }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit country",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  editCountry(\r\n    id: \"60ce448b2d3d152f80b00624\"\r\n    name: \"Carlos\", \r\n    currencies: [\r\n      {code: \"ARS\", name: \"Argentine pija\", symbol: \"$\"}\r\n    ], \r\n    population: 10000\r\n  ){\r\n    name\r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete country by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGM1ZTc3ZWNjYmQ3NTAwMTI0YzAwODIiLCJlbWFpbCI6ImNhbGl4dG8ueS5nb256YWxlekBnbWFpbC5jb20iLCJ1c2VyIjoiQ2FsaXh0byBHb256YWxleiIsInBhc3N3b3JkIjoiJDJiJDEwJC5kN0tJVXIzZTdNNTJyMUYwY1d2NmVVcmVheFovclpWUW5lWkxvZjY1NHpxSmRtUGFGQUMyIiwiX192IjowLCJpYXQiOjE2MjM1ODMwMTEsImV4cCI6MTYyMzY2OTQxMX0.rIDCB6PHh_xTeswOyJ-0vY0nntZqsGMzqe6L-npjkGY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  addCountry(\r\n    name: \"Carlos\", \r\n    currencies: [\r\n      {code: \"ARS\", name: \"Argentine peso\", symbol: \"$\"}\r\n    ], \r\n    population: 10000\r\n  ){\r\n    name\r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get countries only SEK",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n    countries (name: \"Germany\") {\r\n        name,\r\n        currencies {\r\n            SEKConversion,\r\n        }\r\n    }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit country",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  editCountry(\r\n    id: \"60ce448b2d3d152f80b00624\"\r\n    name: \"Carlos\", \r\n    currencies: [\r\n      {code: \"ARS\", name: \"Argentine pija\", symbol: \"$\"}\r\n    ], \r\n    population: 10000\r\n  ){\r\n    name\r\n  }\r\n}\r\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGM1ZDI1ZDc1N2IwZTQzNDAxYjAzNzciLCJlbWFpbCI6ImNhbGl4dG8ueS5nb256YWxlekBnbWFpbC5jb20iLCJ1c2VyIjoiQ2FsaXh0byBHb256YWxleiIsInBhc3N3b3JkIjoiJDJiJDEwJElXMzB2ZmY0UmdyMllveUtxYzVsNC41dW41T1ZQOTM1T0hCS0sxcHNVblZsOHp0Z3VjSzZHIiwiX192IjowLCJpYXQiOjE2MjQxODg4MDksImV4cCI6MTYyNDI3NTIwOX0.F2-hR_iOMUn6TIzdDDNknU9LUjjD6UQUxUVmEYrXAoo",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
